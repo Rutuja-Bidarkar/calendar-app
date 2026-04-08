@@ -1,0 +1,76 @@
+:root {
+  --background-morning: hsl(35, 100%, 98%);
+  --background-evening: hsl(230, 20%, 15%);
+  --accent-base: hsl(25, 80%, 50%);
+  --text-main: #2d2d2d;
+  --text-muted: #666666;
+  --paper-color: #fcfcfc;
+  --grid-line: rgba(0, 0, 0, 0.05);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --spiral-metal: #a0a0a0;
+}
+
+[data-theme='dark'] {
+  --text-main: #f0f0f0;
+  --text-muted: #a0a0a0;
+  --paper-color: #1e1e1e;
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #000;
+  color: var(--text-main);
+  transition: background-color 1s ease, color 1s ease;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Texture Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.03;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3BaseFilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+#calendar-section {
+  min-height: 100vh;
+  transition: opacity 1s ease;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}

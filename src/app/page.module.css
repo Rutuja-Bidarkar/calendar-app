@@ -1,0 +1,49 @@
+.scrollContainer {
+  height: 100vh;
+  overflow-y: hidden; /* Lock scroll, we handle it via vortex */
+  background: #000;
+  position: relative;
+}
+
+.monthSection {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: center;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backgroundLayer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1s ease, transform 1s ease;
+  z-index: 1;
+  filter: brightness(0.6);
+}
+
+.monthSection:hover .backgroundLayer {
+  transform: scale(1.05);
+}
+
+.contentLayer {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: center;
+}
+
+.grainOverlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3BaseFilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}

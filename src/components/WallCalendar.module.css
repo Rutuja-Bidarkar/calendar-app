@@ -1,0 +1,276 @@
+.calendarContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.calendarPaper {
+  width: 100%;
+  max-width: 1000px;
+  position: relative;
+}
+
+.paperContent {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 28px;
+  box-shadow: 0 50px 100px rgba(0,0,0,0.4);
+  padding: 2.5rem 3rem;
+  position: relative;
+}
+
+.spiral {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 40px;
+}
+
+.spiralRing {
+  width: 10px;
+  height: 28px;
+  background: linear-gradient(to right, #ccc, #fff 50%, #999);
+  border-radius: 4px;
+}
+
+.mainLayout {
+  display: flex;
+  gap: 3rem;
+}
+
+.gridSection { flex: 2.2; }
+
+.calendarHeader {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.monthTitle {
+  font-family: var(--font-playfair);
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.yearTitle {
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 2px;
+}
+
+.selectionTooltip {
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.dayOfWeek {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.dayTile {
+  aspect-ratio: 1;
+  background: var(--tile-bg);
+  border: 1px solid var(--tile-border);
+  border-radius: 14px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.dayTile:hover {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.04);
+}
+
+.dayNum {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* Range Highlighting */
+.inRange {
+  background: var(--range-hsla);
+  border-color: var(--accent);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.startDay, .endDay {
+  background: var(--accent) !important;
+  border-color: white !important;
+  box-shadow: 0 0 20px var(--accent);
+  z-index: 5;
+}
+
+.startDay .dayNum, .endDay .dayNum { color: white; }
+
+.isToday {
+  border: 2px solid white !important;
+  box-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+
+.festivalLabel {
+  position: absolute;
+  bottom: 8px;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: var(--accent);
+  width: 90%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.indicators {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: flex;
+  gap: 3px;
+}
+
+.iconPin, .iconFlag { color: white; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+
+/* Notes Sidebar */
+.notesSidebar {
+  flex: 1;
+  background: rgba(0,0,0,0.2);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.notesHeader { display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; color: white; }
+.notesHeader h3 { margin: 0; font-family: var(--font-playfair); font-size: 1.4rem; }
+
+.noteInputArea { display: flex; gap: 8px; margin-bottom: 2rem; }
+.noteInputArea input {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  font-size: 0.85rem;
+}
+.noteInputArea button {
+  background: var(--accent);
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+.notesList { flex: 1; overflow-y: auto; }
+.selectionHint { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+
+.noteCard {
+  background: rgba(255,255,255,0.05);
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  border-left: 3px solid var(--accent);
+}
+
+.noteCardHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.noteCardHeader span { font-size: 0.7rem; font-weight: 800; color: var(--accent); }
+.noteCardHeader button { background: none; border: none; color: white; cursor: pointer; opacity: 0.4; }
+.noteCardHeader button:hover { opacity: 1; }
+.noteCard p { font-size: 0.9rem; color: rgba(255,255,255,0.8); margin: 0; }
+
+/* Modals */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContent {
+  background: #111;
+  padding: 2.5rem;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 500px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.modalHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; color: white; }
+.modalHeader h3 { margin: 0; font-family: var(--font-playfair); font-size: 1.8rem; }
+.modalHeader button { background: none; border: none; color: white; cursor: pointer; }
+
+.monthGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.monthBtn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 12px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.activeMonth { background: var(--accent); border-color: white; }
+
+.yearGrid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; max-height: 250px; overflow-y: auto; }
+.yearBtn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 8px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+.activeYear { background: var(--accent); }
+
+@media (max-width: 800px) {
+  .mainLayout { flex-direction: column; }
+  .monthTitle { font-size: 2.8rem; }
+}
