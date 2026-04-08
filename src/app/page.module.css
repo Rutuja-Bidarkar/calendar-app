@@ -1,6 +1,6 @@
 .scrollContainer {
   height: 100vh;
-  overflow-y: hidden; /* Lock scroll, we handle it via vortex */
+  overflow-y: hidden;
   background: #000;
   position: relative;
 }
@@ -8,7 +8,6 @@
 .monthSection {
   height: 100vh;
   width: 100%;
-  scroll-snap-align: center;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -23,11 +22,7 @@
   background-position: center;
   transition: opacity 1s ease, transform 1s ease;
   z-index: 1;
-  filter: brightness(0.6);
-}
-
-.monthSection:hover .backgroundLayer {
-  transform: scale(1.05);
+  filter: brightness(0.7);
 }
 
 .contentLayer {
@@ -43,7 +38,72 @@
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 100;
+  z-index: 1000;
   opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3BaseFilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Scroll Instruction Styling */
+.scrollIndicator {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 8px 16px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  animation: bounce 2s infinite ease-in-out;
+}
+
+.scrollIndicator span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.mouseIcon {
+  width: 16px;
+  height: 26px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  position: relative;
+}
+
+.mouseWheel {
+  width: 2px;
+  height: 6px;
+  background: white;
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  animation: scrollWheel 1.5s infinite;
+}
+
+@keyframes scrollWheel {
+  0% { opacity: 0; transform: translate(-50%, 0); }
+  50% { opacity: 1; transform: translate(-50%, 4px); }
+  100% { opacity: 0; transform: translate(-50%, 8px); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@media (max-width: 600px) {
+  .scrollIndicator {
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 1.5rem;
+  }
 }

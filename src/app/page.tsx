@@ -162,6 +162,14 @@ export default function Home() {
       </div>
 
       <div className={styles.grainOverlay} />
+
+      {/* Floating Scroll Instruction */}
+      <div className={styles.scrollIndicator}>
+        <div className={styles.mouseIcon}>
+          <div className={styles.mouseWheel} />
+        </div>
+        <span>Scroll to explore seasons</span>
+      </div>
     </main>
   );
 }
